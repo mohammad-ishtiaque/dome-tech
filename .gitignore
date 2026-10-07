@@ -1,0 +1,22 @@
+# Deployment link (local Vercel project settings)
+.vercel
+
+# Private notes and working docs (client messages, personal guides)
+CLIENT-REQUEST.md
+FIGMA-IMPORT.md
+CLAUDE.md
+.claude/
+notes/
+
+# Dependencies, logs, env files
+node_modules/
+*.log
+.env
+.env.*
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

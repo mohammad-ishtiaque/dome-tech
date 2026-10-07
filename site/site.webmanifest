@@ -1,0 +1,13 @@
+{
+  "name": "Digital Dome",
+  "short_name": "Digital Dome",
+  "description": "Building Somalia’s Digital Future",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f6faff",
+  "theme_color": "#1f7aff",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
