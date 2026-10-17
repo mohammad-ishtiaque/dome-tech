@@ -111,7 +111,7 @@
       if (v) { a.href = "mailto:" + v; if (!a.hasAttribute("data-keep-text")) a.textContent = v; }
     });
     $$("[data-phone]").forEach(function (el) {
-      if (D.contact.phone) { el.hidden = false; el.innerHTML = '<a href="tel:' + esc(D.contact.phone.replace(/\s/g, "")) + '">' + esc(D.contact.phone) + "</a>"; }
+      if (D.contact.phone) { el.hidden = false; var row = el.closest("[data-phone-row]"); if (row) row.hidden = false; el.innerHTML = '<a href="tel:' + esc(D.contact.phone.replace(/\s/g, "")) + '">' + esc(D.contact.phone) + "</a>"; }
     });
   }
   var socialEl = $("[data-social]");

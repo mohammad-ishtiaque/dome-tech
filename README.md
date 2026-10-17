@@ -64,17 +64,42 @@ Running `node build.mjs` afterwards is optional. It writes the same values into 
 | Analytics (Plausible recommended) | Add the script in `head()` in `build.mjs`. CTA, product and form events are already tagged with `data-track`. |
 | Google Search Console verification | Add the verification meta tag in `head()` in `build.mjs`, then submit the sitemap |
 
-## Deploy
+## Pages
 
-**Live on Vercel:** https://dome-tech.vercel.app (project `dome-tech`). `vercel.json` builds with `node build.mjs`, serves `site/`, and applies the security and caching headers. To redeploy after changes:
+Navigation follows the brief: Home, About, Products (SomSpot, Shifaa, Fagaaro, SomSoft), Investors / Partners, News / Updates, Careers, Contact.
 
-```bash
-npx vercel@latest deploy --prod
-```
+| URL | Source |
+|---|---|
+| `/`, `/investors/`, product pages, legal pages | `build.mjs` + `src/content.mjs` |
+| `/about/`, `/news/`, `/careers/`, `/contact/` | `src/pages-extra.mjs` |
+| News posts | one JSON file per post in `content/news/` |
+| Job openings | one JSON file per role in `content/careers/` (the page shows a "no open roles" message when empty) |
 
-To use the real domain, add `somdigitaldome.com` under Vercel → Project → Settings → Domains and update the DNS records at the registrar.
+## Content manager (/admin)
 
-Any other static host also works. Netlify and Cloudflare Pages read `site/_headers` (HSTS, CSP, nosniff, frame-deny, caching) automatically. Publish directory: `site`. If you add Plausible or a form provider other than Formspree, add its domain to the CSP in `_headers`.
+Non-developers add news and job openings at `/admin` (Decap CMS, free and open source). Saving there commits a JSON file to the GitHub repo, and Cloudflare rebuilds the site automatically, usually within a minute.
+
+- Editors sign in with a **GitHub account that has write access to the repo**.
+- Login runs through two small Cloudflare Pages Functions in `functions/api/`. They only work on the deployed site, not in the local preview.
+- To add a post without the CMS, copy a file in `content/news/` and run `node build.mjs`.
+
+## Deploy (Cloudflare Pages)
+
+One-time setup in the Cloudflare dashboard:
+
+1. **Workers & Pages → Create → Pages → Connect to Git**, and pick `mohammad-ishtiaque/dome-tech`.
+2. Build settings: production branch `main`, framework preset **None**, build command `node build.mjs`, build output directory `site`.
+3. **Create a GitHub OAuth App** (GitHub → Settings → Developer settings → OAuth Apps → New):
+   - Homepage URL: the site URL, e.g. `https://dome-tech.pages.dev`
+   - Authorization callback URL: `https://dome-tech.pages.dev/api/callback`
+4. In the Pages project → **Settings → Environment variables** (Production), add:
+   - `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` (from the OAuth App; mark the secret as encrypted)
+   - `CMS_BASE_URL` = the site URL, e.g. `https://dome-tech.pages.dev`
+5. Redeploy. `site/_headers` applies the security and caching headers automatically.
+
+When the site moves to `somdigitaldome.com`, add the domain under **Custom domains**, then update `CMS_BASE_URL` and the two OAuth App URLs to the new domain.
+
+After that, every merge to `main` deploys the site, and every other branch gets a preview URL. The earlier Vercel preview (`vercel.json`) can be removed once Cloudflare is live.
 
 ## Content rules followed
 

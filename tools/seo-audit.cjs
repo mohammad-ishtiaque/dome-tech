@@ -2,7 +2,7 @@
 const fs = require("fs"), path = require("path");
 const root = fs.existsSync("site") ? "site" : ".";
 const pages = [];
-(function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : f.endsWith(".html") && pages.push(p); } })(root);
+(function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : f.endsWith(".html") && !p.includes("admin") && pages.push(p); } })(root);
 const resolve = (href) => { const u = href.split("#")[0].split("?")[0]; if (!u) return null; const f = path.join(root, u.endsWith("/") ? u + "index.html" : u); return f; };
 let problems = [], titles = {}, descs = {};
 for (const p of pages) {

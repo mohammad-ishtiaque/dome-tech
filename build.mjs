@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import vm from "node:vm";
 import { mkdirSync } from "node:fs";
 import { SITE, STATS, PRODUCTS, REVENUE_MATRIX, SEO, HOME_FAQ, PRODUCT_FAQ } from "./src/content.mjs";
+import { extraPages } from "./src/pages-extra.mjs";
 
 const OUT = new URL("./site/", import.meta.url);
 const ctx = { window: {} };
@@ -104,14 +105,16 @@ function header(active) {
   <div class="container">
     <a class="brand" href="/" aria-label="Digital Dome home">${domeMark("dmh")}<span class="brand-name">Digital Dome<small>Technology Group</small></span></a>
     <nav class="nav" aria-label="Primary">
-      <a href="/#about"${cur("about")}>About</a>
+      <a href="/"${cur("home")}>Home</a>
+      <a href="/about/"${cur("about")}>About</a>
       <div class="nav-drop" data-open="false">
         <button type="button" aria-expanded="false" aria-haspopup="true">Products ${I.chev}</button>
         <div class="nav-menu">${menu}</div>
       </div>
-      <a href="/#business-model">Business Model</a>
-      <a href="/investors/"${cur("investors")}>Investors &amp; Partners</a>
-      <a href="/#partner">Contact</a>
+      <a href="/investors/"${cur("investors")}>Investors / Partners</a>
+      <a href="/news/"${cur("news")}>News / Updates</a>
+      <a href="/careers/"${cur("careers")}>Careers</a>
+      <a href="/contact/"${cur("contact")}>Contact</a>
     </nav>
     <a class="btn btn--primary btn--sm header-cta header-cta--desk" href="/investors/#inquiry" data-track="CTA: Header Partner">Partner With Us</a>
     <a class="btn btn--primary btn--sm header-cta header-cta--mob" href="/investors/#inquiry" data-track="CTA: Header Partner (mobile)">Invest / Partner</a>
@@ -119,13 +122,15 @@ function header(active) {
   </div>
 </header>
 <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
-  <a href="/#about">About</a>
+  <a href="/">Home</a>
+  <a href="/about/">About</a>
   <p class="label">Products</p>
   ${mob}
   <p class="label">Company</p>
-  <a href="/#business-model">Business Model</a>
-  <a href="/investors/">Investors &amp; Partners</a>
-  <a href="/#partner">Contact</a>
+  <a href="/investors/">Investors / Partners</a>
+  <a href="/news/">News / Updates</a>
+  <a href="/careers/">Careers</a>
+  <a href="/contact/">Contact</a>
   <a class="btn btn--primary" href="/investors/#inquiry" data-track="CTA: Mobile Menu Partner">Partner With Digital Dome</a>
 </nav>`;
 }
@@ -146,10 +151,11 @@ function footer() {
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="/#about">About</a></li>
+          <li><a href="/about/">About</a></li>
           <li><a href="/investors/">Investors &amp; Partners</a></li>
-          <li><a href="/#business-model">Business Model</a></li>
-          <li><a href="/#growth">Growth Vision</a></li>
+          <li><a href="/news/">News &amp; Updates</a></li>
+          <li><a href="/careers/">Careers</a></li>
+          <li><a href="/contact/">Contact</a></li>
         </ul>
       </div>
       <div>
@@ -464,7 +470,7 @@ ${faqBlock(HOME_FAQ, "Digital Dome at a glance")}
   return page({
     title: SEO.home.title,
     desc: SEO.home.desc,
-    path: "/",
+    path: "/", active: "home",
     extra: ld(orgLd) + ld(siteLd) + faqLd(HOME_FAQ),
   }, body);
 }
@@ -757,6 +763,7 @@ const pages = {
   "/terms/": legalPage("terms"),
   "/404.html": notFound(),
   ...Object.fromEntries(PRODUCTS.map((p) => [`/${p.slug}/`, productPage(p)])),
+  ...extraPages({ page, sectionHead, I, esc, PRODUCTS, pmark, DATA, SITE, inquiryForm, crumbsLd, ld }),
 };
 for (const [p, html] of Object.entries(pages)) {
   const file = p.endsWith("/") ? p.slice(1) + "index.html" : p.slice(1);
@@ -770,5 +777,65 @@ writeFileSync(new URL("sitemap.xml", OUT), `<?xml version="1.0" encoding="UTF-8"
 ${Object.keys(pages).filter((p) => p !== "/404.html").map((p) => `  <url><loc>${SITE.domain}${p}</loc><lastmod>${today}</lastmod><changefreq>${p === "/" ? "weekly" : "monthly"}</changefreq><priority>${p === "/" ? "1.0" : /privacy|terms/.test(p) ? "0.3" : "0.8"}</priority></url>`).join("\n")}
 </urlset>
 `);
-writeFileSync(new URL("robots.txt", OUT), `User-agent: *\nAllow: /\n\nSitemap: ${SITE.domain}/sitemap.xml\n`);
+writeFileSync(new URL("robots.txt", OUT), `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: ${SITE.domain}/sitemap.xml\n`);
+
+// Content manager (Decap CMS) at /admin. CMS_BASE_URL must be the live site origin (it hosts /api/auth).
+const CMS_BASE_URL = process.env.CMS_BASE_URL || "https://dome-tech.pages.dev";
+const CMS_REPO = process.env.CMS_REPO || "mohammad-ishtiaque/dome-tech";
+mkdirSync(new URL("admin/", OUT), { recursive: true });
+writeFileSync(new URL("admin/index.html", OUT), `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Digital Dome content manager</title>
+</head>
+<body>
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+</body>
+</html>
+`);
+writeFileSync(new URL("admin/config.yml", OUT), `backend:
+  name: github
+  repo: ${CMS_REPO}
+  branch: main
+  base_url: ${CMS_BASE_URL}
+  auth_endpoint: /api/auth
+site_url: ${CMS_BASE_URL}
+display_url: ${CMS_BASE_URL}
+media_folder: site/assets/img/uploads
+public_folder: /assets/img/uploads
+collections:
+  - name: news
+    label: News & Updates
+    label_singular: Update
+    folder: content/news
+    extension: json
+    format: json
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Publish date, widget: datetime }
+      - { name: summary, label: Short summary (1-2 sentences), widget: text }
+      - { name: body, label: Article, widget: markdown, buttons: [bold, italic, link, heading-two, heading-three, quote, bulleted-list, numbered-list], editor_components: [image] }
+  - name: careers
+    label: Careers
+    label_singular: Job opening
+    folder: content/careers
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Job title, widget: string }
+      - { name: location, label: Location, widget: string, required: false }
+      - { name: type, label: Type, widget: select, options: [Full-time, Part-time, Contract, Internship], required: false }
+      - { name: open, label: Show on website, widget: boolean, default: true }
+      - { name: summary, label: Short summary, widget: text, required: false }
+      - { name: body, label: Description, widget: markdown, buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list] }
+`);
 console.log(`Built ${Object.keys(pages).length} pages → site/`);
