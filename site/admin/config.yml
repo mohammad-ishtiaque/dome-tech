@@ -1,0 +1,41 @@
+backend:
+  name: github
+  repo: mohammad-ishtiaque/dome-tech
+  branch: main
+  base_url: https://dome-tech.pages.dev
+  auth_endpoint: /api/auth
+site_url: https://dome-tech.pages.dev
+display_url: https://dome-tech.pages.dev
+media_folder: site/assets/img/uploads
+public_folder: /assets/img/uploads
+collections:
+  - name: news
+    label: News & Updates
+    label_singular: Update
+    folder: content/news
+    extension: json
+    format: json
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Publish date, widget: datetime }
+      - { name: summary, label: Short summary (1-2 sentences), widget: text }
+      - { name: body, label: Article, widget: markdown, buttons: [bold, italic, link, heading-two, heading-three, quote, bulleted-list, numbered-list], editor_components: [image] }
+  - name: careers
+    label: Careers
+    label_singular: Job opening
+    folder: content/careers
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Job title, widget: string }
+      - { name: location, label: Location, widget: string, required: false }
+      - { name: type, label: Type, widget: select, options: [Full-time, Part-time, Contract, Internship], required: false }
+      - { name: open, label: Show on website, widget: boolean, default: true }
+      - { name: summary, label: Short summary, widget: text, required: false }
+      - { name: body, label: Description, widget: markdown, buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list] }

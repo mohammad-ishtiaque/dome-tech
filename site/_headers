@@ -16,3 +16,9 @@
 # site-data.js is edited by non-developers without a rebuild, so always revalidate.
 /assets/js/*
   Cache-Control: no-cache
+
+# Content manager: loads its editor from a CDN and talks to GitHub, so the site CSP is detached here.
+/admin/*
+  ! Content-Security-Policy
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
