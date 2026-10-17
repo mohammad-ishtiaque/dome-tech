@@ -4,6 +4,7 @@
 # Private notes and working docs (client messages, personal guides)
 CLIENT-REQUEST.md
 FIGMA-IMPORT.md
+FIGMA-DASHBOARD.md
 CLAUDE.md
 .claude/
 notes/
@@ -13,6 +14,7 @@ node_modules/
 *.log
 .env
 .env.*
+!.env.example
 
 # Editor and OS files
 .vscode/
@@ -20,3 +22,11 @@ node_modules/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Apps
+apps/*/build/
+apps/*/dist/
+apps/*/.react-router/
+apps/api/.data/
+apps/api/uploads/
+apps/admin/dist-preview/

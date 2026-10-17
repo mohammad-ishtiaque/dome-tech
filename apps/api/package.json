@@ -1,0 +1,26 @@
+{
+  "name": "@dome/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/index.ts",
+    "start": "node --env-file-if-exists=.env --import tsx src/index.ts",
+    "seed": "tsx --env-file-if-exists=.env src/seed.ts --reset",
+    "typecheck": "tsc -p .",
+    "create-admin": "tsx --env-file-if-exists=.env src/create-admin.ts",
+    "demo-data": "tsx --env-file-if-exists=.env src/demo-data.ts"
+  },
+  "dependencies": {
+    "@dome/shared": "workspace:*",
+    "express": "^5.3.0",
+    "mongoose": "^9.11.2",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.0.0",
+    "mongodb-memory-server": "^11.3.0",
+    "typescript": "^7.0.2"
+  }
+}
