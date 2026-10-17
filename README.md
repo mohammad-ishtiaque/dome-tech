@@ -1,4 +1,48 @@
-# Digital Dome: somdigitaldome.com
+# Digital Dome platform
+
+The website now runs on a dynamic platform. Everything (pages, sections, products, news, careers, settings) is managed from a dashboard.
+
+| App | Folder | Tech | Local URL |
+|---|---|---|---|
+| Website | `apps/web` | React Router v8 (Remix), server-side rendered for SEO | http://localhost:5173 |
+| Dashboard | `apps/admin` | React + Vite | http://localhost:5174 |
+| API | `apps/api` | Node.js + Express + MongoDB | http://localhost:4000 |
+| Shared types & section library | `packages/shared` | TypeScript | |
+
+## Run it locally
+
+Requires Node 24 (`nvm use 24.22.0`) and pnpm.
+
+```bash
+pnpm install
+pnpm dev
+```
+
+`pnpm dev` starts all three apps. A local MongoDB starts automatically (data in `apps/api/.data`); nothing to install. On first start the database is filled with the current website content.
+
+Create your dashboard login (prints a temporary password once; change it under **Account**):
+
+```bash
+pnpm create-admin you@example.com "Your Name"
+```
+
+Other commands: `pnpm seed` (reset website content to the original; stop the API first) and `pnpm typecheck`.
+
+## How content works
+
+- Every page is an ordered list of **sections** (hero, cards, stats, FAQ, table, text + image, screenshots, inquiry form…). In the dashboard you can add, edit, reorder, hide or delete sections on any page, and create new pages.
+- Section types and their fields are defined once in `packages/shared/src/sections.ts`. The dashboard builds its forms from that list, and `apps/web/app/components/sections` renders them. Adding a new section type = one entry there + one React component.
+- Products have their own editor: details, brand color, app mockup screenshot, header buttons, page sections and SEO.
+- Contact-form messages are saved in the database and listed under **Inquiries**.
+- Uploaded images are stored in `apps/api/uploads` (set `UPLOAD_DIR` on the server).
+
+---
+
+# Previous static version
+
+The sections below describe the original static site (`site/`, `build.mjs`), kept for reference.
+
+## Digital Dome: somdigitaldome.com (static version)
 
 An investor-focused corporate website built to the *Digital Dome Website Developer Guideline*. It is a static site with no framework and no dependencies, which keeps it fast on mobile connections and easy to host anywhere.
 
