@@ -30,4 +30,8 @@ if ((await PageModel.estimatedDocumentCount()) === 0) {
 }
 
 const port = Number(process.env.PORT) || 4000;
-app.listen(port, () => console.log(`API ready on http://localhost:${port}`));
+// On the VPS HOST=127.0.0.1 keeps the API private: only nginx and the website can reach it.
+const host = process.env.HOST;
+const onListen = () => console.log(`API ready on http://${host || "localhost"}:${port}`);
+if (host) app.listen(port, host, onListen);
+else app.listen(port, onListen);
