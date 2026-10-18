@@ -14,9 +14,11 @@ if ! swapon --show | grep -q /swapfile; then
   grep -q '^/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 fi
 
-echo "== pnpm (the version pinned in package.json)"
+echo "== pnpm"
+# An existing global pnpm is left alone: other apps on the server may rely on it, and pnpm itself
+# switches to the version pinned in package.json when it runs inside this repo.
 PNPM_VERSION=$(node -p "require('./package.json').packageManager.split('@')[1]")
-if [ "$(pnpm -v 2>/dev/null)" != "$PNPM_VERSION" ]; then
+if ! command -v pnpm >/dev/null; then
   # Node installed under the home folder (nvm) needs no sudo; a system-wide Node does.
   case "$(command -v node)" in
     "$HOME"/*) npm install -g "pnpm@$PNPM_VERSION" ;;
