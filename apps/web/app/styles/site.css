@@ -119,9 +119,9 @@ p { margin: 0 0 1em; }
 .site-header .container { height: 100%; display: flex; align-items: center; gap: 24px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); flex-shrink: 0; }
 .brand:hover { text-decoration: none; }
-.brand-mark { width: 38px; height: 38px; filter: drop-shadow(0 6px 12px rgba(31, 122, 255, 0.35)); }
-.brand-name { font-family: var(--font-head); font-weight: 800; font-size: 1.05rem; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; }
-.brand-name small { display: block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; color: var(--muted); margin-top: 5px; }
+.brand-mark { width: 76px; height: 38px; }
+.brand-name { font-family: var(--font-head); font-weight: 800; font-size: 1.05rem; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; color: #1abfef; }
+.brand-name small { display: block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.01em; text-transform: none; color: #171547; margin-top: 4px; }
 
 .nav { margin-left: auto; display: flex; align-items: center; gap: 2px; }
 .nav > a, .nav-drop > button { white-space: nowrap; color: var(--ink); font-size: 0.94rem; font-weight: 500; padding: 10px 14px; border-radius: 999px; background: none; border: 0; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
@@ -156,8 +156,8 @@ body.nav-open { overflow: hidden; }
 @media (max-width: 440px) {
   .site-header .container { gap: 10px; }
   .brand { gap: 8px; }
-  .brand-mark { width: 32px; height: 32px; }
-  .brand-name { font-size: 0.86rem; letter-spacing: 0.08em; }
+  .brand-mark { width: 56px; height: 28px; }
+  .brand-name { font-size: 0.86rem; letter-spacing: 0.04em; }
   .brand-name small { display: none; }
   .header-cta--mob { padding: 0 14px; font-size: 0.82rem; min-height: 38px; }
   .nav-toggle { width: 40px; height: 40px; margin-left: 0; }
@@ -224,7 +224,7 @@ body.nav-open { overflow: hidden; }
 .dome-node:nth-of-type(4) { animation-delay: -6s; }
 @keyframes float { 0%, 100% { margin-top: 0; } 50% { margin-top: -7px; } }
 .dome-core { position: absolute; left: 50%; top: 66%; transform: translate(-50%, -50%); text-align: center; color: var(--ink); font-family: var(--font-head); }
-.dome-core .brand-mark { width: 72px; height: 72px; margin: 0 auto 10px; filter: drop-shadow(0 14px 24px rgba(31, 122, 255, 0.45)); }
+.dome-core .brand-mark { display: block; width: 104px; height: 52px; margin: 0 auto 10px; filter: drop-shadow(0 14px 20px rgba(23, 21, 71, 0.25)); }
 .dome-core strong { display: block; letter-spacing: 0.16em; font-size: 0.9rem; }
 .dome-core span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .hero-chip { position: absolute; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px; background: var(--grad); color: #fff; box-shadow: var(--shadow-glow); animation: float 9s ease-in-out infinite; }
@@ -326,7 +326,7 @@ body.nav-open { overflow: hidden; }
    Ecosystem diagram (on blue band)
    ========================================================================== */
 .eco-parent { width: fit-content; margin: 0 auto; display: flex; align-items: center; gap: 16px; padding: 18px 28px 18px 18px; border-radius: 20px; background: #fff; color: var(--ink); box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.12), 0 30px 60px -24px rgba(7, 28, 80, 0.6); }
-.eco-parent .brand-mark { width: 50px; height: 50px; }
+.eco-parent .brand-mark { width: 80px; height: 40px; }
 .eco-parent strong { display: block; font-family: var(--font-head); letter-spacing: 0.14em; }
 .eco-parent span { font-size: 0.82rem; color: var(--muted); }
 .eco-lines { height: 64px; }
@@ -474,6 +474,7 @@ body.nav-open { overflow: hidden; }
 .site-footer::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--grad); }
 .site-footer .brand { color: #fff; }
 .site-footer .brand-name small { color: #a9c2ea; }
+.site-footer .brand-mark { --dome: #fff; }
 .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
 .footer-grid h4 { color: #fff; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 18px; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }

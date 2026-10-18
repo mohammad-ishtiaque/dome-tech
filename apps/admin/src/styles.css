@@ -52,7 +52,8 @@ p { margin: 0 0 0.6em; }
 .shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
 .sidebar { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 18px; padding: 20px 14px; background: #fff; border-right: 1px solid var(--line); overflow-y: auto; }
 .sidebar .brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 12px; color: var(--ink); font: 800 0.95rem var(--head); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
-.sidebar .brand small { display: block; font: 600 0.68rem "Inter"; letter-spacing: 0.12em; color: var(--muted); }
+.sidebar .brand span { color: #1abfef; }
+.sidebar .brand small { display: block; font: 500 0.7rem "Inter"; letter-spacing: 0.02em; text-transform: none; color: #171547; margin-top: 2px; }
 .sidebar nav { display: grid; gap: 2px; }
 .sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; color: var(--body); font-weight: 500; text-decoration: none; }
 .sidebar nav a:hover { background: var(--bg); color: var(--ink); }

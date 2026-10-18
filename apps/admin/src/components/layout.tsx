@@ -32,7 +32,7 @@ export function Shell() {
       <div className={`shell${menu ? " menu-open" : ""}`}>
         <aside className="sidebar">
           <Link to="/" className="brand" onClick={() => setMenu(false)}>
-            <img src="/favicon.svg" alt="" width={34} height={34} />
+            <img src="/logo.svg" alt="" width={60} height={30} />
             <span>Digital Dome<small>Dashboard</small></span>
           </Link>
           <nav aria-label="Dashboard">

@@ -28,17 +28,23 @@ export function Icon({ name, className }: { name: string; className?: string }) 
   return <svg viewBox="0 0 24 24" aria-hidden="true" className={className} {...stroke}>{PATHS[name]}</svg>;
 }
 
-/** Digital Dome logo mark. */
+/** Digital Dome logo mark: navy dome, cloud and phone with a chip (2:1). Set --dome to recolour the dome on dark backgrounds. */
 export function DomeMark({ className = "brand-mark" }: { className?: string }) {
   const id = useId();
   return (
-    <svg className={className} viewBox="0 0 48 48" aria-hidden="true">
-      <defs><linearGradient id={id} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#1f7aff" /><stop offset="1" stopColor="#22c3ee" /></linearGradient></defs>
-      <rect width="48" height="48" rx="12" fill={`url(#${id})`} />
-      <path d="M10 33a14 14 0 0128 0" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" />
-      <path d="M16.5 33a7.5 7.5 0 0115 0" fill="none" stroke="#fff" strokeOpacity=".9" strokeWidth="3.2" strokeLinecap="round" />
-      <path d="M8 37.5h32" stroke="#fff" strokeOpacity=".55" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="24" cy="12.5" r="2.4" fill="#fff" />
+    <svg className={className} viewBox="300 192 424 213" aria-hidden="true">
+      <defs><clipPath id={id}><rect x="300" y="150" width="424" height="254" /></clipPath></defs>
+      <g clipPath={`url(#${id})`}>
+        <path d="M306 404a206 206 0 0 1 412 0z" style={{ fill: "var(--dome, #171547)" }} />
+        <g fill="#fff"><circle cx="504" cy="318" r="88" /><circle cx="416" cy="372" r="62" /><circle cx="594" cy="368" r="76" /><rect x="416" y="330" width="178" height="80" /></g>
+        <g fill="#1abfef"><circle cx="504" cy="318" r="75" /><circle cx="416" cy="372" r="49" /><circle cx="594" cy="368" r="63" /><rect x="416" y="330" width="178" height="80" /></g>
+        <rect x="453" y="287" width="110" height="130" rx="14" fill="#fff" />
+        <rect x="466" y="300" width="85" height="120" rx="4" fill="#171547" />
+        <path d="M466 322.5h85" stroke="#fff" strokeWidth="5" />
+        <rect x="484" y="346" width="48" height="48" fill="#fff" />
+        <rect x="494" y="356" width="28" height="28" fill="none" stroke="#171547" strokeWidth="4" />
+        <path d="M491 334v12M505 334v12M519 334v12M491 394v12M505 394v12M519 394v12M469 355.5h15M469 369.5h15M469 383.5h15M532 355.5h16M532 369.5h16M532 383.5h16" stroke="#fff" strokeWidth="4" />
+      </g>
     </svg>
   );
 }
