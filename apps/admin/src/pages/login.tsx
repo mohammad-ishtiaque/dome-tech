@@ -31,9 +31,11 @@ export function Login() {
   return (
     <div className="login">
       <form className="login-card" onSubmit={submit}>
-        <img src="/logo.svg" alt="Digital Dome Technology Group" width={112} height={56} />
-        <h1>Digital Dome dashboard</h1>
-        <p className="muted">Sign in to manage the website.</p>
+        <div className="login-brand">
+          <img src="/logo.svg" alt="Digital Dome Technology Group" width={156} height={120} />
+          <h1>Dashboard</h1>
+          <p className="muted">Sign in to manage the website.</p>
+        </div>
         {DEMO && <div className="preview-note">Preview: any email and password will sign you in.</div>}
         <div className="field"><label htmlFor="email">Email</label><input id="email" name="email" type="email" autoComplete="username" required autoFocus defaultValue={DEMO ? "preview@somdigitaldome.com" : undefined} /></div>
         <div className="field"><label htmlFor="password">Password</label><input id="password" name="password" type="password" autoComplete="current-password" required defaultValue={DEMO ? "preview-password" : undefined} /></div>

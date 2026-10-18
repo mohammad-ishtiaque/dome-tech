@@ -32,8 +32,8 @@ export function Shell() {
       <div className={`shell${menu ? " menu-open" : ""}`}>
         <aside className="sidebar">
           <Link to="/" className="brand" onClick={() => setMenu(false)}>
-            <img src="/logo.svg" alt="" width={60} height={30} />
-            <span>Digital Dome<small>Dashboard</small></span>
+            <img src="/logo.svg" alt="Digital Dome Technology Group" width={78} height={60} />
+            <span>Dashboard</span>
           </Link>
           <nav aria-label="Dashboard">
             {NAV.map((n) => (

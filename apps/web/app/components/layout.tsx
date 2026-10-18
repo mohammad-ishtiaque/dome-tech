@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import type { Layout } from "~/lib/api.server";
-import { DomeMark, Icon, ProductMark } from "./icons";
+import { Icon, ProductMark } from "./icons";
 
 const NAV = [
   { to: "/", label: "Home", end: true },
@@ -11,11 +11,11 @@ const NAV = [
   { to: "/contact/", label: "Contact" },
 ] as const;
 
-function Brand() {
+/** The full logo (mark above the wordmark). The light version is for dark backgrounds. */
+function Brand({ light = false }: { light?: boolean }) {
   return (
     <Link className="brand" to="/" aria-label="Digital Dome home">
-      <DomeMark />
-      <span className="brand-name">Digital Dome<small>Technology Group</small></span>
+      <img src={light ? "/logo-light.svg" : "/logo.svg"} alt="Digital Dome Technology Group" width={78} height={60} />
     </Link>
   );
 }
@@ -98,7 +98,7 @@ export function Footer({ layout }: { layout: Layout }) {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-about">
-            <Brand />
+            <Brand light />
             <p>{settings.footerText}</p>
           </div>
           <div>

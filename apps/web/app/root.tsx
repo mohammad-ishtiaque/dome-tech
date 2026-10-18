@@ -7,8 +7,8 @@ import { Blobs } from "./components/sections";
 import "./styles/site.css";
 
 export const links: Route.LinksFunction = () => [
-  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
-  { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+  { rel: "icon", href: "/favicon.svg?v=2", type: "image/svg+xml" },
+  { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=2" },
   { rel: "manifest", href: "/site.webmanifest" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
