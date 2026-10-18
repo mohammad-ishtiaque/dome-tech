@@ -28,14 +28,14 @@ export function Icon({ name, className }: { name: string; className?: string }) 
   return <svg viewBox="0 0 24 24" aria-hidden="true" className={className} {...stroke}>{PATHS[name]}</svg>;
 }
 
-/** Digital Dome logo mark: navy dome, cloud and phone with a chip (2:1). Set --dome to recolour the dome on dark backgrounds. */
+/** Digital Dome logo mark without the wordmark: navy dome, cloud and phone with a chip (2:1). */
 export function DomeMark({ className = "brand-mark" }: { className?: string }) {
   const id = useId();
   return (
     <svg className={className} viewBox="300 192 424 213" aria-hidden="true">
       <defs><clipPath id={id}><rect x="300" y="150" width="424" height="254" /></clipPath></defs>
       <g clipPath={`url(#${id})`}>
-        <path d="M306 404a206 206 0 0 1 412 0z" style={{ fill: "var(--dome, #171547)" }} />
+        <path d="M306 404a206 206 0 0 1 412 0z" fill="#171547" />
         <g fill="#fff"><circle cx="504" cy="318" r="88" /><circle cx="416" cy="372" r="62" /><circle cx="594" cy="368" r="76" /><rect x="416" y="330" width="178" height="80" /></g>
         <g fill="#1abfef"><circle cx="504" cy="318" r="75" /><circle cx="416" cy="372" r="49" /><circle cx="594" cy="368" r="63" /><rect x="416" y="330" width="178" height="80" /></g>
         <rect x="453" y="287" width="110" height="130" rx="14" fill="#fff" />

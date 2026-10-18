@@ -119,9 +119,8 @@ p { margin: 0 0 1em; }
 .site-header .container { height: 100%; display: flex; align-items: center; gap: 24px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); flex-shrink: 0; }
 .brand:hover { text-decoration: none; }
+.brand img { display: block; width: 78px; height: 60px; }
 .brand-mark { width: 76px; height: 38px; }
-.brand-name { font-family: var(--font-head); font-weight: 800; font-size: 1.05rem; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; color: #1abfef; }
-.brand-name small { display: block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.01em; text-transform: none; color: #171547; margin-top: 4px; }
 
 .nav { margin-left: auto; display: flex; align-items: center; gap: 2px; }
 .nav > a, .nav-drop > button { white-space: nowrap; color: var(--ink); font-size: 0.94rem; font-weight: 500; padding: 10px 14px; border-radius: 999px; background: none; border: 0; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
@@ -156,9 +155,7 @@ body.nav-open { overflow: hidden; }
 @media (max-width: 440px) {
   .site-header .container { gap: 10px; }
   .brand { gap: 8px; }
-  .brand-mark { width: 56px; height: 28px; }
-  .brand-name { font-size: 0.86rem; letter-spacing: 0.04em; }
-  .brand-name small { display: none; }
+  .brand img { width: 65px; height: 50px; }
   .header-cta--mob { padding: 0 14px; font-size: 0.82rem; min-height: 38px; }
   .nav-toggle { width: 40px; height: 40px; margin-left: 0; }
 }
@@ -472,9 +469,7 @@ body.nav-open { overflow: hidden; }
 /* Footer */
 .site-footer { background: var(--deep-950); color: #a9c2ea; padding: 72px 0 32px; font-size: 0.93rem; position: relative; }
 .site-footer::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--grad); }
-.site-footer .brand { color: #fff; }
-.site-footer .brand-name small { color: #a9c2ea; }
-.site-footer .brand-mark { --dome: #fff; }
+.site-footer .brand img { width: 117px; height: 90px; }
 .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
 .footer-grid h4 { color: #fff; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 18px; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }

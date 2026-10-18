@@ -52,8 +52,7 @@ p { margin: 0 0 0.6em; }
 .shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
 .sidebar { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 18px; padding: 20px 14px; background: #fff; border-right: 1px solid var(--line); overflow-y: auto; }
 .sidebar .brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 12px; color: var(--ink); font: 800 0.95rem var(--head); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
-.sidebar .brand span { color: #1abfef; }
-.sidebar .brand small { display: block; font: 500 0.7rem "Inter"; letter-spacing: 0.02em; text-transform: none; color: #171547; margin-top: 2px; }
+.sidebar .brand span { align-self: flex-end; margin-bottom: 4px; font: 600 0.68rem "Inter"; letter-spacing: 0.12em; color: var(--muted); }
 .sidebar nav { display: grid; gap: 2px; }
 .sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; color: var(--body); font-weight: 500; text-decoration: none; }
 .sidebar nav a:hover { background: var(--bg); color: var(--ink); }
@@ -241,7 +240,8 @@ p { margin: 0 0 0.6em; }
 /* Login */
 .login { min-height: 100vh; display: grid; place-items: center; padding: 16px; background: radial-gradient(700px 400px at 80% 0%, rgba(34, 195, 238, 0.25), transparent 60%), radial-gradient(600px 400px at 0% 100%, rgba(124, 188, 255, 0.35), transparent 60%), var(--bg); }
 .login-card { width: min(400px, 100%); display: grid; gap: 14px; padding: 32px; background: #fff; border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgba(17, 79, 192, 0.45); }
-.login-card h1 { font-size: 1.4rem; margin: 6px 0 0; }
+.login-brand { display: grid; justify-items: center; gap: 6px; text-align: center; margin-bottom: 4px; }
+.login-brand h1 { font-size: 1.5rem; font-weight: 800; margin: 8px 0 0; }
 .login-card p { margin: 0; }
 
 /* Capture mode (?capture) for Figma import */
