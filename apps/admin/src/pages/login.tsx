@@ -31,7 +31,7 @@ export function Login() {
   return (
     <div className="login">
       <form className="login-card" onSubmit={submit}>
-        <img src="/favicon.svg" alt="" width={52} height={52} />
+        <img src="/logo.svg" alt="Digital Dome Technology Group" width={112} height={56} />
         <h1>Digital Dome dashboard</h1>
         <p className="muted">Sign in to manage the website.</p>
         {DEMO && <div className="preview-note">Preview: any email and password will sign you in.</div>}
